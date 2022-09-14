@@ -134,4 +134,4 @@ function calcularTotalCarrito(carrito) {
             total += cadaReserva.precioFinal;
         })
     return total;
-    }
+}
