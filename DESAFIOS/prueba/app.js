@@ -1,6 +1,6 @@
 //FUNCIÓN PARA LA COTIZACIÓN DE UN AUTO DE ALQUILER.
 //DEFINO VARIABLES:
-let precioFinal = 0;
+/*let precioFinal = 0;
 let nombre = '';
 let destino = '';
 let carrito = [];
@@ -134,4 +134,10 @@ function calcularTotalCarrito(carrito) {
             total += cadaReserva.precioFinal;
         })
     return total;
-    }
+    }*/
+
+const buscarDisponibilidad = document.querySelector("#correo");
+
+buscarDisponibilidad.onClick = function() {
+    alert("Buscando disponiblidad...")
+}
