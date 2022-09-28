@@ -1,4 +1,4 @@
-const carritoVacio = [];
+const carritoVacio = JSON.parse(localStorage.getItem("Carrito")) || [];
 
 const carrito = (productoId) => {
     const cartContainer = document.getElementById("cart-container");
@@ -16,9 +16,14 @@ const carrito = (productoId) => {
         })
     }
         mostrarProductosEnCarrito()
+        recargaLocalStorage()
     };
 
     function deleteProduct(e) {
         let btnClicked = e.target;
         btnClicked.parentElement.remove()
     }
+
+    function recargaLocalStorage(){
+    localStorage.setItem("Carrito",JSON.stringify(carritoVacio))
+}
