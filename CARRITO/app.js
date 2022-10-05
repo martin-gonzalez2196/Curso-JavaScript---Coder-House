@@ -40,7 +40,7 @@ function mostrarAutos(productos) {
             <p class="card-text">
             $${producto.precio}.- por día.
             </p>
-            <a href="#" class="btn btn-primary" id="${producto.id}">Reservar</a>
+            <a href="#" class="btn btn-primary" id="${producto.id}">Agregar al Carrito</a>
         </div>
     </div>`
     productContainer.appendChild(card);
@@ -48,9 +48,23 @@ function mostrarAutos(productos) {
     const button = document.getElementById(`${producto.id}`);
     button.addEventListener(`click`, () => {
         carrito(`${producto.id}`);
-        alert(`Reservaste el siguiente vehiculo: ${producto.modelo}`)
+        alert()
     })
     })
 }
 
 mostrarAutos(carritoProductos)
+
+function alert(){
+    Swal.fire({
+        icon: 'warning',
+        title: 'Usted está por reservar el siguiente vehiculo:',
+        text: 'modelo del auto',// quiero mostrar `${productos.modelo}` pero no se como.
+        confirmButtonText: 'Confirmar',
+        footer: '<b>Ir al Carrito para confirmar la reserva.</b>',
+        backdrop: true,
+        allowOutsideClick: false,
+        allowEscapeKey: true,
+        showCloseButton: true,
+    })
+}

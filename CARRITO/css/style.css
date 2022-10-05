@@ -276,7 +276,7 @@ h3 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: linear-gradient(to bottom, #0077b6, #0096c7, #00b4d8, #48cae4, #90e0ef);
+    background-color: #0077b6;
 }
 
 .estiloFlota {
