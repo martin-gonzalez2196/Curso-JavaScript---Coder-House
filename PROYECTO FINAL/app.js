@@ -1,39 +1,18 @@
-/*class Productos {
-    constructor(id,modelo,precio,imagen) {
-        this.id = id;
-        this.modelo = modelo;
-        this.precio = precio;
-        this.imagen = imagen
-    }
-}
-
-const carritoProductos = [];
-
-const auto1 = new Productos ("1","Volkswagen Gol Trend", 1000, "./assets/images/goltrend.jpg");
-const auto2 = new Productos ("2","Renault Kwid", 1000, "./assets/images/kwid.jpg");
-const auto3 = new Productos ("3","Renault Sandero", 1000, "./assets/images/sandero.jpg");
-const auto4 = new Productos ("4","Fiat Argo", 2000, "./assets/images/argo.jpg");
-const auto5 = new Productos ("5","Chevrolet Onix", 2000, "./assets/images/onix.jpg");
-const auto6 = new Productos ("6","Chevrolet Prisma", 2000, "./assets/images/prisma.jpg");
-const auto7 = new Productos ("7","Renault Alaskan", 3000, "./assets/images/alaskan.jpg");
-const auto8 = new Productos ("8","Fiat Toro", 3000, "./assets/images/toro.jpg");
-const auto9 = new Productos ("9","Chevrolet Spin", 3000, "./assets/images/spin.jpg");
-
-carritoProductos.push(auto1,auto2,auto3,auto4,auto5,auto6,auto7,auto8,auto9);*/
-
 //función para mostrar los productos del data.json.
+
+var carritoProductos = [];
 
 async function fetchCarritoProductos() {
     const response = await fetch('./data.json');
     return await response.json();
 }
 
-let carritoProductos = [];
-
 fetchCarritoProductos().then(productos => {
     carritoProductos = productos
     mostrarAutos(carritoProductos)
 })
+
+//función para mostrar en CARDS los distintos autos disponibles.
 
 function mostrarAutos(productos) {
     const productContainer = document.getElementById("product-container");
@@ -60,20 +39,106 @@ function mostrarAutos(productos) {
     const button = document.getElementById(`${producto.id}`);
     button.addEventListener(`click`, () => {
         carrito(`${producto.id}`);
-        alert()
+        alert(producto.modelo)
     })
     })
 }
 
 mostrarAutos(carritoProductos)
 
-function alert(){
+function alert(productoModelo){
     Swal.fire({
         icon: 'warning',
         title: 'Usted está por reservar el siguiente vehiculo:',
-        text: 'modelo del auto',// quiero mostrar `${productos.modelo}` pero no se como.
+        text: productoModelo,
         confirmButtonText: 'Confirmar',
         footer: '<b>Ir al Carrito para confirmar la reserva.</b>',
+        backdrop: true,
+        allowOutsideClick: false,
+        allowEscapeKey: true,
+        showCloseButton: true,
+    })
+}
+
+//función para pushear los productos al carrito y que este muestre un modal, donde se pueden quitar los productos seleccionados.
+
+var carritoVacio = [];
+
+const carrito = (productoId) => {
+    const cartContainer = document.getElementById("cart-container");
+    
+    const mostrarProductosEnCarrito = () =>{
+        let producto = carritoProductos.find(p => p.id === Number(productoId));
+        carritoVacio.push(producto)
+        let div = document.createElement('div');
+        div.setAttribute("id",`${producto.id}`);
+        div.innerHTML = `<p>${producto.modelo}</p>
+        <p>Precio: $${producto.precio}</p>
+        <button class="btn btn-danger btn-sm" id="delete_${producto.id}">Quitar</button>`
+        cartContainer.appendChild(div)
+        const buttonDelete = document.getElementById(`delete_${producto.id}`);
+        buttonDelete.addEventListener('click',(e) => {
+            deleteProduct(e)
+        })
+    }
+
+//función para que se sumen los productos seleccionados.
+
+    const updateTotal = () =>{
+        let total = 0
+        carritoVacio.forEach((p)=>{
+            total = total + p.precio;
+        })
+        document.getElementById("totalFinal").value = total;
+    }
+
+    mostrarProductosEnCarrito()
+    recargaLocalStorage()
+    updateTotal()
+    };
+
+    function deleteProduct(e) {
+        let btnClicked = e.target;
+        btnClicked.parentElement.remove()
+    }
+
+    function recargaLocalStorage(){
+    localStorage.setItem("Carrito",JSON.stringify(carritoVacio))
+}
+
+//función para que el boton BUSCAR DISPONIBILIDAD del INDEX.HTML guarde la info. en el LocalStorage y que a su vez, rediriga a la página de FLOTA.
+
+function callButton() {
+    const button = document.getElementById("buttonDisponibilidad");
+    button.addEventListener(`click`, () => {
+        const nombre = document.getElementById('nombreApellido').value
+        const correo = document.getElementById('correo').value
+        localStorage.setItem("userInfo",JSON.stringify(
+            {
+                nombre:nombre,
+                correo:correo
+            }
+        ))
+        window.location = "http://127.0.0.1:5500/PROYECTO%20FINAL/flota.html"
+
+    })
+}
+callButton()
+
+//Función para que cuando el usuario aprete el boton CONFIRMAR RESERVA, devuelva un mensaje final con los datos del usuario guardados en el LocalStorage.
+
+function buttonConfirmReserva() {
+    const userData = JSON.parse(window.localStorage.getItem("userInfo")); 
+    mensajeFinal(userData.nombre, userData.correo)
+}
+
+function mensajeFinal(nombre, correo){
+    Swal.fire({
+        icon: 'success',
+        title: `Estimado/a, ${nombre}`,
+        text: `Se envió la confirmación de su reserva a: ${correo}`,
+        confirmButtonText: 'Finalizar',
+        footer: '<b>Muchas gracias por su compra!</b>',
         backdrop: true,
         allowOutsideClick: false,
         allowEscapeKey: true,

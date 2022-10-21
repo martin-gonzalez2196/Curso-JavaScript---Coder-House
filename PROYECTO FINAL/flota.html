@@ -74,7 +74,7 @@
                                 >
                             </li>
                             <li class="nav-item">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCarrito">
                                     CARRITO
                                 </button>
                             </li>
@@ -84,7 +84,7 @@
             </nav>
         </header>
         <main class="fondoFlota" id="product-container">
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -92,184 +92,28 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="cart-container">
-                    ...
+                    </div>
+                    <div class="mb-3">
+                        <label
+                            for="formGroupExampleInput"
+                            class="form-label"
+                            >TOTAL FINAL: </label
+                        >
+                        <input
+                            type="text"
+                            disabled="disabled"
+                            class="form-control shadow p-2 mb-2 bg-body rounded"
+                            id="totalFinal"
+                            value="1000"
+                        />
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Confirmar reserva</button>
+                    <button onclick="buttonConfirmReserva()" type="button" class="btn btn-primary" id="confirm_button" data-bs-dismiss="modal">Confirmar reserva</button>
                     </div>
                 </div>
                 </div>
             </div>
-            <!--<div class="container">
-                <div class="d-flex justify-content-center">
-                    <h2 class="text-center estiloTituloFlota">NUESTRA FLOTA</h2>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <h3 class="estiloSubtituloFlota">Categoria A</h3>
-                </div>
-
-                <div class="row row-cols-3 row-cols-sm-3 g-4">
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/goltrend.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Volkswagen Gol Trend</h5>
-                            <p class="card-text">
-                                $ 1.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/kwid.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Renault Kwid</h5>
-                            <p class="card-text">
-                                $ 1.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/sandero.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Renault Sandero</h5>
-                            <p class="card-text">
-                                $ 1.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <h3 class="estiloSubtituloFlota">Categoria B</h3>
-                </div>
-
-                <div class="row row-cols-3 row-cols-sm-3 g-4">
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/argo.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Fiat argo</h5>
-                            <p class="card-text">
-                                $ 2.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/onix.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Chevrolet Onix</h5>
-                            <p class="card-text">
-                                $ 2.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/prisma.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Chevrolet Prisma</h5>
-                            <p class="card-text">
-                                $ 2.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <h3 class="estiloSubtituloFlota">Categoria C</h3>
-                </div>
-
-                <div class="row row-cols-3 row-cols-sm-3 g-4">
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/alaskan.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Renault alaskan</h5>
-                            <p class="card-text">
-                                $ 3.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/toro.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Fiat Toro</h5>
-                            <p class="card-text">
-                                $ 3.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                    <div class="card text-center" style="width: 18rem">
-                        <img
-                            src="./assets/images/spin.jpg"
-                            alt="Foto de auto"
-                            style="padding: 20px"
-                            class="card-img-top"
-                            alt="Foto de Auto"
-                        />
-                        <div class="card-body">
-                            <h5 class="card-title">Chevrolet Spin</h5>
-                            <p class="card-text">
-                                $ 3.000.- por día.
-                            </p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
         </main>
         <footer>
             <div class="container">
